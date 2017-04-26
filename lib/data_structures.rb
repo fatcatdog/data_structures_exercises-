@@ -2,7 +2,9 @@
 
 # Write a method that returns the range of its argument (an array of integers).
 def range(arr)
-  # your code goes here
+  min = arr.min
+  max = arr.max
+  range = max - min
 end
 
 # Write a method that returns a boolean indicating whether an array is in sorted
@@ -10,7 +12,7 @@ end
 # whether its operands are equal, e.g., 2 == 2 => true, ["cat", "dog"] ==
 # ["dog", "cat"] => false
 def in_order?(arr)
-  # your code goes here
+arr == arr.sort
 end
 
 
@@ -18,14 +20,29 @@ end
 
 # Write a method that returns the number of vowels in its argument
 def num_vowels(str)
-  # your code goes here
+vowels = %w(a e i o u)
+count = 0
+letters = str.downcase.chars
+letters.each do |x|
+  if vowels.include?(x)
+    count += 1
+  end
+end
+  count
 end
 
 # Write a method that returns its argument with all its vowels removed.
 def devowel(str)
-  # your code goes here
-end
-
+  vowels = %w(a e i o u)
+  count = ""
+  letters = str.downcase.chars
+  letters.each do |x|
+    if !vowels.include?(x)
+      count << x
+    end
+  end
+    count
+  end
 
 # HARD
 
@@ -33,26 +50,32 @@ end
 # non-negative integer in descending order and as strings, e.g.,
 # descending_digits(4291) #=> ["9", "4", "2", "1"]
 def descending_digits(int)
-  # your code goes here
+string = int.to_s
+string.chars.sort.reverse
 end
 
 # Write a method that returns a boolean indicating whether a string has
 # repeating letters. Capital letters count as repeats of lowercase ones, e.g.,
 # repeating_letters?("Aa") => true
 def repeating_letters?(str)
-  # your code goes here
+str.downcase.chars.uniq.length != str.downcase.chars.length
 end
 
 # Write a method that converts an array of ten integers into a phone number in
 # the format "(123) 456-7890".
 def to_phone_number(arr)
-  # your code goes here
+  one = arr[0..2].join
+  two = arr[3..5].join
+  three = arr[6..9].join
+  "(" + one + ")" + " " + two + "-" + three
 end
 
 # Write a method that returns the range of a string of comma-separated integers,
 # e.g., str_range("4,1,8") #=> 7
 def str_range(str)
-  # your code goes here
+nums = str.split(",").sort.reverse
+nums.first.to_i - nums.last.to_i
+
 end
 
 
@@ -63,5 +86,5 @@ end
 # provided. HINT: use the take(num) and drop(num) methods. You won't need much
 # code, but the solution is tricky!
 def my_rotate(arr, offset=1)
-  # your code goes here
+  arr.drop(offset % arr.length) + arr.take(offset % arr.length)
 end
